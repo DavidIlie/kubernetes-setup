@@ -6,9 +6,12 @@ make sure to install keepalived first
 sudo apt install -y keepalived
 ```
 
+or you can use the ansible playbook in the second page
+
 afterwards copy the two files here to `/etc/keepalived`
 
-ensure that you change in the keepalived config the the:
+ensure that you change in the keepalived config this information below:
 
-- state - can be `MASTER` or `BACKUP`
-- priority - make sure master is the highest
+-   `state` - can be `MASTER` or `BACKUP`
+-   `priority` - make sure master is the highest
+-   `virtual_ipaddress` - this will be your load balancer IP
