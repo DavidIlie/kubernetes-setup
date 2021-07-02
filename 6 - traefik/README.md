@@ -1,9 +1,8 @@
 # Chart values for Traefik
 
-ENSURE THAT YOU HAVE SOME SORT OF VOLUME MANAGER INSTALLED (LIKE LONGHORN)
+make sure you fill in the correct information in both `traefik-chart-values.yaml` and in `traefik-config.yaml` to prevent errors
 
-Helm is of course required
-A configured kubectl is also of course required
+ENSURE THAT YOU HAVE SOME SORT OF VOLUME MANAGER INSTALLED (LIKE LONGHORN)
 
 ## Installing and Upgrading Traefik
 
