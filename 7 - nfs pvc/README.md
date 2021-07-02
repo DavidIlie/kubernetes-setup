@@ -2,6 +2,8 @@
 
 You first need to create a NFS share but make sure you give it the right permissions with the command below:
 
+(if your nas is using Truenas or Freenas, you can enable NFS from the "Services" section)
+
 ```bash
 chown nobody: *path*
 ```
