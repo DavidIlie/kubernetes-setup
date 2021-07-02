@@ -1,5 +1,7 @@
 # Kubernetes Setup
 
+This is my documentation for installing a HA k3s cluster in my homelab, but it can be easily modified for yours.
+
 MAKE SURE THAT ALL NODES ARE USING UBUNTU 20.04!!!
 
 if you want all these setup make sure you run them in this order:
