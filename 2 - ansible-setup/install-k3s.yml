@@ -1,0 +1,49 @@
+- hosts: "master"
+  become: yes
+  tasks:
+      - name: remove rancher folder
+        shell: rm -rf /etc/rancher
+      - name: install k3s
+        shell: curl -sfL https://get.k3s.io | K3S_TOKEN=aisdbasyuidbauisdbuiasdbuiasdbuiasbud sh -s - server --cluster-init --node-taint CriticalAddonsOnly=true:NoExecute --tls-san loadbalancer --write-kubeconfig-mode 644 --disable servicelb --disable traefik
+
+- hosts: "other_masters"
+  become: yes
+  tasks:
+      - name: remove_rancher_folder
+        shell: rm -rf /etc/rancher
+      - name: install_k3s
+        shell: curl -sfL https://get.k3s.io | K3S_TOKEN=aisdbasyuidbauisdbuiasdbuiasdbuiasbud sh -s - server --server https://loadbalancer:6443 --node-taint CriticalAddonsOnly=true:NoExecute --write-kubeconfig-mode 644 --disable servicelb --disable traefik
+      - name: wait for node-token
+        wait_for:
+            path: /var/lib/rancher/k3s/server/node-token
+      - name: read node-token from master
+        slurp:
+            src: /var/lib/rancher/k3s/server/node-token
+        register: node_token
+      - name: print node-token
+        ansible.builtin.debug:
+            msg: "{{node_token.content | b64decode}}"
+
+- hosts: "workers"
+  become: yes
+  vars_prompt:
+      - name: token
+        prompt: What is the token for K3S?
+        private: no
+  tasks:
+      - name: remove_rancher_folder
+        shell: rm -rf /etc/rancher
+      - name: install k3s
+        shell: curl -sfL https://get.k3s.io | K3S_URL=https://loadbalancer:6443 K3S_TOKEN={{token}} sh -
+
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+      - name: install k3s
+        shell: scp -r david@192.168.1.143:/etc/rancher/k3s/k3s.yaml ~/.kube/config
+      - name: Replace https://localhost:6443 by https://loadbalancer:6443
+        command: >-
+            kubectl config set-cluster default
+              --server=https://loadbalancer:6443
+              --kubeconfig ~/.kube/config
+        changed_when: true

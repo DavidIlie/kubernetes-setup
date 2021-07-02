@@ -1,0 +1,18 @@
+- hosts: "workers"
+  become: yes
+  tasks:
+    - name: remove_k3s
+      shell: /usr/local/bin/k3s-agent-uninstall.sh
+
+- hosts: "other_masters"
+  become: yes
+  tasks:
+    - name: remove_k3s
+      shell: /usr/local/bin/k3s-uninstall.sh
+
+- hosts: "master"
+  become: yes
+  tasks:
+    - name: remove_k3s
+      shell: /usr/local/bin/k3s-uninstall.sh
+    
