@@ -22,5 +22,5 @@ ansible-playbook uninstall-k3s.yml --user david --ask-become-pass -i hosts.ini
 ### if you want to do step 7 (provision nfs volumes)
 
 ```bash
-ansible-playbook uninstall-nfs.yml --user david --ask-become-pass -i hosts.ini
+ansible-playbook install-nfs.yml --user david --ask-become-pass -i hosts.ini
 ```
