@@ -1,0 +1,16 @@
+kind: IngressRoute
+apiVersion: traefik.containo.us/v1alpha1
+metadata:
+    name: heimdall
+    namespace: internal
+spec:
+    entryPoints:
+        - websecure
+    routes:
+        - match: Host(`heimdall.davidapps.dev`)
+          kind: Rule
+          services:
+              - name: heimdall
+                port: 80
+          middlewares:
+              - name: default-authelia@kubernetescrd

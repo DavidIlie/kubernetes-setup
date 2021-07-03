@@ -10,7 +10,7 @@ theme: dark
 jwt_secret: a_very_important_secret
 default_redirection_url: https://auth.davidapps.dev
 totp:
-  issuer: authelia.com
+    issuer: authelia.com
 
 # duo_api:
 #  hostname: api-123456789.example.com
@@ -19,54 +19,53 @@ totp:
 #  secret_key: 1234567890abcdefghifjkl
 
 authentication_backend:
-  file:
-    path: /config/users_database.yml
-    password:
-      algorithm: argon2id
-      iterations: 1
-      salt_length: 16
-      parallelism: 8
-      memory: 64
-      
+    file:
+        path: /config/users_database.yml
+        password:
+            algorithm: argon2id
+            iterations: 1
+            salt_length: 16
+            parallelism: 8
+            memory: 64
+
 access_control:
-  default_policy: deny
-  rules:
-    - domain: nucleus.davidapps.dev
-      policy: bypass
-    - domain: heimdall.davidapps.dev
-      policy: one_factor
+    default_policy: one_factor
+    rules:
+        - domain: nucleus.davidapps.dev
+          policy: bypass
+        - domain: heimdall.davidapps.dev
+          policy: one_factor
 
 session:
-  name: authelia_session
-  # This secret can also be set using the env variables AUTHELIA_SESSION_SECRET_FILE
-  secret: unsecure_session_secret
-  expiration: 3600  # 1 hour
-  inactivity: 300  # 5 minutes
-  domain: davidapps.dev  # Should match whatever your root protected domain is
+    name: authelia_session
+    # This secret can also be set using the env variables AUTHELIA_SESSION_SECRET_FILE
+    secret: unsecure_session_secret
+    expiration: 3600 # 1 hour
+    inactivity: 300 # 5 minutes
+    domain: davidapps.dev # Should match whatever your root protected domain is
 
-  # redis:
-  #   host: redis
-  #   port: 6379
-  #   # This secret can also be set using the env variables AUTHELIA_SESSION_REDIS_PASSWORD_FILE
-  #   # password: authelia
+    # redis:
+    #   host: redis
+    #   port: 6379
+    #   # This secret can also be set using the env variables AUTHELIA_SESSION_REDIS_PASSWORD_FILE
+    #   # password: authelia
 
 regulation:
-  max_retries: 3
-  find_time: 120
-  ban_time: 300
+    max_retries: 3
+    find_time: 120
+    ban_time: 300
 
 storage:
-  local:
-    path: /config/db.sqlite3
+    local:
+        path: /config/db.sqlite3
 
 notifier:
-  # smtp:
-  #   username: test
-  #   # This secret can also be set using the env variables AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
-  #   password: password
-  #   host: mail.example.com
-  #   port: 25
-  #   sender: admin@example.com
-  filesystem:
-    filename: /config/notification.txt
-...
+    # smtp:
+    #   username: test
+    #   # This secret can also be set using the env variables AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
+    #   password: password
+    #   host: mail.example.com
+    #   port: 25
+    #   sender: admin@example.com
+    filesystem:
+        filename: /config/notification.txt

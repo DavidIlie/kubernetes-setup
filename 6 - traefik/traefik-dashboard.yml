@@ -5,10 +5,13 @@ metadata:
     namespace: kube-system
 spec:
     entryPoints:
-        - web
+        - websecure
     routes:
-        - match: Host(`traefik.davidapps.dev`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))
+        - match: Host(`traefik.davidapps.dev`)
           kind: Rule
           services:
               - name: api@internal
                 kind: TraefikService
+        # Enable if you are using authelia
+        #   middlewares:
+        #       - name: default-authelia@kubernetescrd
