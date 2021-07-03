@@ -1,3 +1,3 @@
 # Authelia integration
 
-To be implemented soon.
+THIS IS STILL A WORK IN PROGRESS
