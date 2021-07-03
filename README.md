@@ -13,7 +13,7 @@ If you follow this guide entirely, you should be awarded with
 
 If you want to get this setup for your own homelab, the folders are organised in their exact order by numbers so make sure to follow them. Also, make sure nodes are not running Ubuntu 21.04 as there are some errors with installing Rancher in that version.
 
-This has been my research for the past year since I've been messing around with Kubernetes since July 2020. Hope this helps somebody!
+This repository contains my research from the past year since I've been messing around with Kubernetes. Hope this helps somebody!
 
 ## Commons
 
