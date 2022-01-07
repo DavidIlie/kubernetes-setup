@@ -32,7 +32,7 @@ afterwards you can install rancher with this command below
 helm install rancher rancher-stable/rancher \
   --namespace cattle-system \
   --set hostname=rancher.davidapps.dev \
-  --version 2.5.8
+  --version 2.6.3
 ```
 
 ensure to change the version when rancher updates
